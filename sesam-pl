@@ -1,0 +1,21 @@
+#!/usr/bin/perl -w
+
+open(F, "> /dev/port");
+select(F);
+$| = 1;
+select(STDOUT);
+
+my $dataFF = sprintf("%c", 255);
+my $data00 = sprintf("%c", 0);
+
+seek(F, 0x3BC, 0);
+print F $dataFF;
+sleep(1);
+seek(F, 0x3BC, 0);
+print F $data00;
+sleep(1);
+seek(F, 0x3BC, 0);
+print F $dataFF;
+sleep(1);
+
+close(F);
